@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070810" />
+  <meta
+    name="description"
+    content="Nexu Chat — converse, jogue e crie seu espaço. Um chat gamer rápido, moderno e feito para comunidades."
+  />
+  <title>Nexu Chat — Seu squad começa aqui</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="startup-screen" id="startupScreen" aria-hidden="true">
+    <canvas class="boot-canvas" id="bootCanvas"></canvas>
+    <div class="startup-grid"></div>
+    <div class="boot-vignette"></div>
+
+    <div class="boot-corner boot-corner-tl">
+      <span>NEXU // CORE</span>
+      <strong>LINK START</strong>
+    </div>
+    <div class="boot-corner boot-corner-tr">
+      <span>NODE 01</span>
+      <strong id="bootClock">00:00:00</strong>
+    </div>
+    <div class="boot-corner boot-corner-bl">
+      <span>SECURE CHANNEL</span>
+      <strong>AES // ACTIVE</strong>
+    </div>
+    <div class="boot-corner boot-corner-br">
+      <span>RENDER ENGINE</span>
+      <strong>WEBGL // READY</strong>
+    </div>
+
+    <div class="startup-core">
+      <div class="logo-assembly" aria-label="Nexu Chat">
+        <div class="logo-orbit orbit-a"></div>
+        <div class="logo-orbit orbit-b"></div>
+
+        <svg class="nexus-logo-svg" id="bootLogo" viewBox="0 0 260 260" role="img" aria-label="Nexu">
+          <defs>
+            <linearGradient id="nexuStroke" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#4ae8d3" />
+              <stop offset="48%" stop-color="#9a83ff" />
+              <stop offset="100%" stop-color="#ff4fd8" />
+            </linearGradient>
+            <filter id="nexuGlow" x="-70%" y="-70%" width="240%" height="240%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <g class="n-ghost">
+            <path d="M62 194 L88 63" />
+            <path d="M88 63 L171 194" />
+            <path d="M171 194 L198 62" />
+          </g>
+
+          <g class="n-live" filter="url(#nexuGlow)">
+            <path class="n-stroke n-stroke-1" d="M62 194 L88 63" />
+            <path class="n-stroke n-stroke-2" d="M88 63 L171 194" />
+            <path class="n-stroke n-stroke-3" d="M171 194 L198 62" />
+          </g>
+
+          <g class="n-nodes">
+            <circle class="n-node n-node-1" cx="62" cy="194" r="5" />
+            <circle class="n-node n-node-2" cx="88" cy="63" r="5" />
+            <circle class="n-node n-node-3" cx="171" cy="194" r="5" />
+            <circle class="n-node n-node-4" cx="198" cy="62" r="5" />
+          </g>
+        </svg>
+
+        <div class="connection-flash flash-a"></div>
+        <div class="connection-flash flash-b"></div>
+      </div>
+
+      <div class="startup-wordmark">
+        <strong>NEXU</strong>
+        <span>CHAT</span>
+      </div>
+
+      <div class="boot-terminal">
+        <div class="boot-line">
+          <span class="terminal-prefix">&gt;</span>
+          <span id="bootText">estabelecendo malha nexu...</span>
+          <span class="boot-cursor"></span>
+        </div>
+
+        <div class="boot-progress">
+          <span id="bootProgress"></span>
+        </div>
+
+        <div class="boot-meta">
+          <span>CORE <b id="coreState">SYNC</b></span>
+          <span>PACKETS <b id="packetCount">0000</b></span>
+          <span class="boot-percent" id="bootPercent">00%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="startup-scan"></div>
+  </div>
+
+  <div class="noise"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="ambient ambient-three"></div>
+  <div class="cursor-aura" id="cursorAura"></div>
+
+  <header class="site-header" id="header">
+    <div class="container nav-wrap">
+      <a href="#top" class="brand" aria-label="Nexu Chat - início">
+        <span class="logo-mark">
+          <span></span><span></span><span></span>
+        </span>
+        <span>NEXU</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#recursos">Recursos</a>
+        <a href="#comunidade">Comunidade</a>
+        <a href="#seguranca">Segurança</a>
+        <a href="#download">Download</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="ghost-button small" href="#download">Baixar app</a>
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#recursos">Recursos</a>
+      <a href="#comunidade">Comunidade</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#download">Download</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid"></div>
+
+      <div class="container hero-layout">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">
+            <span class="live-dot"></span>
+            NOVA ERA DO CHAT GAMER
+          </div>
+
+          <h1>
+            Seu squad.
+            <span>Seu espaço.</span>
+            Seu Nexu.
+          </h1>
+
+          <p>
+            Um chat rápido, moderno e feito para quem joga, cria, conversa e quer
+            construir comunidade sem complicação.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              class="primary-button download-trigger"
+              href="downloads/NexuSetup.exe"
+              download="NexuSetup.exe"
+            >
+              <span class="button-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 18h14" />
+                </svg>
+              </span>
+
+              <span>
+                <strong>Baixar para Windows</strong>
+                <small>Instalador .EXE</small>
+              </span>
+
+              <span class="button-arrow">↗</span>
+            </a>
+
+            <a class="secondary-button" href="#recursos">
+              Explorar recursos
+              <span>↓</span>
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <div>
+              <strong>01</strong>
+              <span>Design focado em gamers</span>
+            </div>
+            <div>
+              <strong>02</strong>
+              <span>Comunidades organizadas</span>
+            </div>
+            <div>
+              <strong>03</strong>
+              <span>Experiência rápida</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stage reveal reveal-delay" id="heroStage">
+          <canvas class="hero-particles" id="heroParticles"></canvas>
+          <div class="stage-depth-grid"></div>
+          <div class="orbital orbital-one"></div>
+          <div class="orbital orbital-two"></div>
+          <div class="orbital orbital-three"></div>
+          <div class="stage-crosshair crosshair-x"></div>
+          <div class="stage-crosshair crosshair-y"></div>
+
+          <div class="app-window tilt-card" id="tiltCard">
+            <div class="window-topbar">
+              <div class="window-controls">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="window-title">
+                <span class="status-dot"></span>
+                Nexu Chat
+              </div>
+              <div class="window-pill">BETA</div>
+            </div>
+
+            <div class="system-strip-mini">
+              <span><i class="pulse-mini"></i> NEXU CLOUD <b>ONLINE</b></span>
+              <span>REGION <b>SA-BR</b></span>
+              <span>VOICE <b>12ms</b></span>
+              <span>BUILD <b>0.7.0-BETA</b></span>
+            </div>
+
+            <div class="app-shell">
+              <aside class="server-rail">
+                <button class="server-icon server-home active">N</button>
+                <button class="server-icon">GX</button>
+                <button class="server-icon">FPS</button>
+                <button class="server-icon">+</button>
+              </aside>
+
+              <aside class="channel-panel">
+                <div class="channel-head">
+                  <div>
+                    <small>COMUNIDADE</small>
+                    <strong>NEXU ARENA</strong>
+                  </div>
+                  <span>⌄</span>
+                </div>
+
+                <div class="channel-group">
+                  <span class="channel-label">TEXTO</span>
+                  <button class="channel active"># geral</button>
+                  <button class="channel"># clips</button>
+                  <button class="channel"># procurando-squad</button>
+                </div>
+
+                <div class="channel-group">
+                  <span class="channel-label">VOZ</span>
+                  <button class="channel voice">◉ Lobby</button>
+                  <button class="channel voice">◉ Ranked</button>
+                </div>
+
+                <div class="profile-bar">
+                  <div class="mini-avatar avatar-you">Y</div>
+                  <div>
+                    <strong>you.exe</strong>
+                    <small>online</small>
+                  </div>
+                  <span>⚙</span>
+                </div>
+              </aside>
+
+              <section class="chat-panel">
+                <div class="chat-head">
+                  <div>
+                    <strong># geral</strong>
+                    <small>Converse com sua comunidade</small>
+                  </div>
+                  <div class="chat-actions">
+                    <span>⌕</span>
+                    <span>◌</span>
+                    <span>⋯</span>
+                  </div>
+                </div>
+
+                <div class="messages">
+                  <div class="message">
+                    <div class="avatar avatar-blue">R</div>
+                    <div>
+                      <div class="message-top">
+                        <strong>Raven</strong>
+                        <span>08:42</span>
+                      </div>
+                      <p>Ranked hoje às 21h? Precisamos fechar o squad.</p>
+                    </div>
+                  </div>
+
+                  <div class="message">
+                    <div class="avatar avatar-purple">K</div>
+                    <div>
+                      <div class="message-top">
+                        <strong>Kira</strong>
+                        <span>08:43</span>
+                      </div>
+                      <p>Eu colo. Manda o convite quando abrir a call.</p>
+                    </div>
+                  </div>
+
+                  <div class="message featured-message">
+                    <div class="avatar avatar-green">N</div>
+                    <div>
+                      <div class="message-top">
+                        <strong>Nexu Bot</strong>
+                        <span>agora</span>
+                      </div>
+                      <p>Sala <b>Ranked</b> criada. Quem entra primeiro?</p>
+                      <button>Entrar na sala</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="typing">
+                  <span>Mensagem para #geral</span>
+                  <div>
+                    <span>＋</span>
+                    <span>☺</span>
+                  </div>
+                </div>
+              </section>
+
+              <aside class="member-panel">
+                <small>ONLINE — 4</small>
+
+                <div class="member">
+                  <div class="mini-avatar avatar-green">N</div>
+                  <div><strong>Nexu Bot</strong><span>online</span></div>
+                </div>
+
+                <div class="member">
+                  <div class="mini-avatar avatar-purple">K</div>
+                  <div><strong>Kira</strong><span>em partida</span></div>
+                </div>
+
+                <div class="member">
+                  <div class="mini-avatar avatar-blue">R</div>
+                  <div><strong>Raven</strong><span>online</span></div>
+                </div>
+
+                <div class="member">
+                  <div class="mini-avatar avatar-you">Y</div>
+                  <div><strong>you.exe</strong><span>online</span></div>
+                </div>
+              </aside>
+            </div>
+
+            <div class="panel-hud" aria-hidden="true">
+              <span class="hud-corner hud-tl"></span>
+              <span class="hud-corner hud-tr"></span>
+              <span class="hud-corner hud-bl"></span>
+              <span class="hud-corner hud-br"></span>
+              <span class="hud-scan"></span>
+            </div>
+            <div class="window-glow"></div>
+          </div>
+
+          <div class="floating-badge badge-one">
+            <span class="badge-icon">⚡</span>
+            <div>
+              <small>LATÊNCIA</small>
+              <strong>12 ms</strong>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-two glass-float">
+            <span class="badge-icon">●</span>
+            <div>
+              <small>STATUS</small>
+              <strong>Todos online</strong>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-three glass-float">
+            <span class="badge-icon shield-mini">◇</span>
+            <div>
+              <small>CRIPTOGRAFIA</small>
+              <strong>Canal protegido</strong>
+            </div>
+          </div>
+
+          <div class="activity-widget glass-float">
+            <div class="widget-head">
+              <span>LIVE ACTIVITY</span>
+              <i></i>
+            </div>
+            <div class="activity-row">
+              <div class="activity-stack">
+                <span class="stack-a">R</span><span class="stack-b">K</span><span class="stack-c">Y</span>
+              </div>
+              <div><strong>24</strong><small>na comunidade</small></div>
+            </div>
+            <div class="micro-chart" aria-hidden="true">
+              <span style="--h:35%"></span><span style="--h:52%"></span><span style="--h:45%"></span>
+              <span style="--h:78%"></span><span style="--h:62%"></span><span style="--h:92%"></span>
+              <span style="--h:74%"></span><span style="--h:100%"></span><span style="--h:82%"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bottom-fade"></div>
+    </section>
+
+    <section class="signal-strip">
+      <div class="signal-track">
+        <span>NEXU CHAT</span><i>✦</i>
+        <span>CONVERSE</span><i>✦</i>
+        <span>JOGUE</span><i>✦</i>
+        <span>CRIE</span><i>✦</i>
+        <span>COMPARTILHE</span><i>✦</i>
+        <span>ENCONTRE SEU SQUAD</span><i>✦</i>
+
+        <span>NEXU CHAT</span><i>✦</i>
+        <span>CONVERSE</span><i>✦</i>
+        <span>JOGUE</span><i>✦</i>
+        <span>CRIE</span><i>✦</i>
+        <span>COMPARTILHE</span><i>✦</i>
+        <span>ENCONTRE SEU SQUAD</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="nexu-systems" aria-label="Nexu live systems">
+      <div class="container systems-grid">
+        <article class="system-card system-card-main reveal">
+          <div class="system-card-top">
+            <span>NEXU // NETWORK</span>
+            <i class="live-dot tiny"></i>
+          </div>
+          <div class="system-number"><span class="counter" data-target="12">0</span><small>ms</small></div>
+          <p>Rota simulada de baixa latência para voz e presença em tempo real.</p>
+          <div class="latency-graph" aria-hidden="true">
+            <svg viewBox="0 0 420 90" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="graphFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#7c5cff" stop-opacity=".35"/>
+                  <stop offset="100%" stop-color="#7c5cff" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path class="graph-area" d="M0 68 C38 63,45 45,75 52 S130 71,158 44 S207 32,236 48 S286 62,316 34 S365 30,420 18 L420 90 L0 90 Z"/>
+              <path class="graph-line" d="M0 68 C38 63,45 45,75 52 S130 71,158 44 S207 32,236 48 S286 62,316 34 S365 30,420 18"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="system-card reveal">
+          <div class="system-card-top"><span>PRESENÇA</span><b>LIVE</b></div>
+          <div class="system-number"><span class="counter" data-target="247">0</span><small>nodes</small></div>
+          <div class="node-field" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </article>
+
+        <article class="system-card reveal">
+          <div class="system-card-top"><span>VOICE CORE</span><b>SYNC</b></div>
+          <div class="voice-spectrum" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p>Pipeline visual preparado para salas de voz e estados de fala.</p>
+        </article>
+
+        <article class="system-card system-card-wide reveal">
+          <div>
+            <div class="system-card-top"><span>IDENTIDADE NEXU</span><b>01</b></div>
+            <h3>Uma interface com linguagem própria.</h3>
+            <p>Vidro escuro, telemetria, profundidade, energia e microinterações formam a assinatura visual do produto.</p>
+          </div>
+          <div class="mini-n-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section features" id="recursos">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <span class="section-kicker">/ RECURSOS</span>
+            <h2>Feito para ficar<br />aberto o dia inteiro.</h2>
+          </div>
+          <p>
+            Menos distração, mais conversa. O Nexu combina estética gamer,
+            organização e interações rápidas em uma interface feita para desktop.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card feature-large reveal">
+            <div class="feature-tag">01 / CONEXÃO</div>
+            <h3>Salas que parecem vivas.</h3>
+            <p>
+              Texto, presença online, canais e espaços de voz em uma navegação
+              que você entende de primeira.
+            </p>
+
+            <div class="voice-visual">
+              <div class="voice-person">
+                <div class="pulse-ring"></div>
+                <div class="portrait">R</div>
+                <strong>Raven</strong>
+                <small>falando agora</small>
+              </div>
+
+              <div class="equalizer" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-tag">02 / IDENTIDADE</div>
+            <h3>Seu perfil. Seu estilo.</h3>
+            <p>
+              Status, avatar, apelido e presença pensados para mostrar quem você
+              é dentro de cada comunidade.
+            </p>
+
+            <div class="profile-card-demo">
+              <div class="demo-cover"></div>
+              <div class="demo-avatar">K</div>
+              <strong>Kira.exe</strong>
+              <small>@kira</small>
+              <span class="demo-status">● Em partida</span>
+            </div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-tag">03 / PERFORMANCE</div>
+            <h3>Visual forte. Movimento leve.</h3>
+            <p>
+              Animações sutis e interações rápidas para manter o app com sensação
+              premium sem parecer pesado.
+            </p>
+
+            <div class="performance-meter">
+              <div class="meter-top">
+                <span>RESPOSTA</span>
+                <strong>RÁPIDA</strong>
+              </div>
+
+              <div class="meter-lines">
+                <span style="--w: 92%"></span>
+                <span style="--w: 76%"></span>
+                <span style="--w: 100%"></span>
+                <span style="--w: 84%"></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section community" id="comunidade">
+      <div class="container split-layout">
+        <div class="community-art reveal">
+          <div class="radar">
+            <div class="radar-ring ring-one"></div>
+            <div class="radar-ring ring-two"></div>
+            <div class="radar-ring ring-three"></div>
+            <div class="radar-beam"></div>
+
+            <div class="radar-node node-one">
+              <span>R</span>
+            </div>
+            <div class="radar-node node-two">
+              <span>K</span>
+            </div>
+            <div class="radar-node node-three">
+              <span>N</span>
+            </div>
+            <div class="radar-node node-four">
+              <span>Y</span>
+            </div>
+
+            <div class="radar-center">
+              <span class="logo-mark large">
+                <span></span><span></span><span></span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-copy reveal">
+          <span class="section-kicker">/ COMUNIDADE</span>
+          <h2>Encontre gente. Monte seu squad. Fique.</h2>
+          <p>
+            O Nexu é pensado para comunidades pequenas, grupos de amigos,
+            criadores e squads que querem um lugar próprio para conversar.
+          </p>
+
+          <div class="bullet-list">
+            <div><span>01</span><p>Canais organizados por assunto.</p></div>
+            <div><span>02</span><p>Pedidos de amizade e presença online.</p></div>
+            <div><span>03</span><p>Nexu Pulse com posts, fotos, curtidas e comentários.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section security" id="seguranca">
+      <div class="container">
+        <div class="security-card reveal">
+          <div class="security-copy">
+            <span class="section-kicker">/ SEGURANÇA</span>
+            <h2>Seu espaço precisa parecer seu.</h2>
+            <p>
+              Arquitetura preparada para autenticação, regras de comunidade,
+              permissões, moderação e proteção da conta.
+            </p>
+
+            <div class="security-pills">
+              <span>Autenticação</span>
+              <span>Permissões</span>
+              <span>Moderação</span>
+              <span>Privacidade</span>
+            </div>
+          </div>
+
+          <div class="security-visual">
+            <div class="shield">
+              <div class="shield-core">
+                <span class="logo-mark large">
+                  <span></span><span></span><span></span>
+                </span>
+              </div>
+              <div class="shield-scan"></div>
+            </div>
+
+            <div class="security-status">
+              <span></span>
+              Sistema operacional
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section download-section" id="download">
+      <div class="container">
+        <div class="download-card reveal">
+          <div class="download-noise"></div>
+
+          <div class="download-copy">
+            <span class="section-kicker">/ DOWNLOAD</span>
+            <h2>Entre no Nexu.</h2>
+            <p>
+              Baixe o Nexu para Windows, instale em poucos cliques e entre na sua comunidade.
+            </p>
+
+            <div class="version-row">
+              <span>Windows 10/11</span>
+              <i></i>
+              <span>64-bit</span>
+              <i></i>
+              <span>v0.7 Beta</span>
+            </div>
+          </div>
+
+          <div class="download-action-wrap">
+            <a
+              class="download-mega download-trigger"
+              href="downloads/NexuSetup.exe"
+              download="NexuSetup.exe"
+            >
+              <div>
+                <small>DOWNLOAD</small>
+                <strong>Nexu Chat</strong>
+              </div>
+
+              <div class="download-mega-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 18h14" />
+                </svg>
+              </div>
+            </a>
+
+            <small class="download-note">
+              Coloque seu instalador em
+              <code>/downloads/NexuSetup.exe</code>
+            </small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta">
+      <div class="container">
+        <div class="final-copy reveal">
+          <span class="pixel-word">NEXU</span>
+          <h2>O próximo convite<br />pode começar aqui.</h2>
+          <a href="#download" class="secondary-button light">
+            Baixar agora
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-layout">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <span class="logo-mark">
+            <span></span><span></span><span></span>
+          </span>
+          <span>NEXU</span>
+        </a>
+        <p>Converse. Jogue. Conecte.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#recursos">Recursos</a>
+        <a href="#comunidade">Comunidade</a>
+        <a href="#seguranca">Segurança</a>
+        <a href="#download">Download</a>
+      </div>
+
+      <div class="footer-end">
+        <span>© <span id="year"></span> Nexu Chat</span>
+        <span>Feito para comunidades.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="download-toast" id="downloadToast" role="status" aria-live="polite">
+    <span class="toast-icon">↓</span>
+    <div>
+      <strong>Download iniciado</strong>
+      <small>Preparando o instalador do Nexu Chat...</small>
+    </div>
+  </div>
+
+  <script>
+const startupScreen = document.getElementById("startupScreen");
+const bootText = document.getElementById("bootText");
+const bootProgress = document.getElementById("bootProgress");
+const bootPercent = document.getElementById("bootPercent");
+const packetCount = document.getElementById("packetCount");
+const coreState = document.getElementById("coreState");
+const bootClock = document.getElementById("bootClock");
+const header = document.getElementById("header");
+const menuButton = document.getElementById("menuButton");
+const mobileMenu = document.getElementById("mobileMenu");
+const tiltCard = document.getElementById("tiltCard");
+const heroStage = document.getElementById("heroStage");
+const downloadToast = document.getElementById("downloadToast");
+const downloadTriggers = document.querySelectorAll(".download-trigger");
+const cursorAura = document.getElementById("cursorAura");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+document.body.classList.add("loading");
+
+const bootSequence = [
+  { text: "mapeando nós de conexão...", progress: 16, state: "LINK" },
+  { text: "conectando traços do núcleo...", progress: 38, state: "DRAW" },
+  { text: "sincronizando identidade nexu...", progress: 63, state: "SYNC" },
+  { text: "validando canal seguro...", progress: 84, state: "AUTH" },
+  { text: "nexu online // bem-vindo.", progress: 100, state: "READY" },
+];
+
+let bootStep = 0;
+let bootCanvasStop = null;
+
+function startClock() {
+  const tick = () => {
+    if (!bootClock) return;
+    const d = new Date();
+    bootClock.textContent = [d.getHours(), d.getMinutes(), d.getSeconds()]
+      .map(v => String(v).padStart(2, "0"))
+      .join(":");
+  };
+  tick();
+  return setInterval(tick, 1000);
+}
+
+function animateValue(element, start, end, duration, formatter = v => String(v)) {
+  if (!element) return;
+  const startTime = performance.now();
+  const frame = now => {
+    const t = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    element.textContent = formatter(Math.round(start + (end - start) * eased));
+    if (t < 1) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+
+function runBootSequence() {
+  if (!startupScreen || !bootText || !bootProgress) {
+    document.body.classList.remove("loading");
+    return;
+  }
+
+  startupScreen.classList.add("sequence-on");
+  const clockTimer = startClock();
+
+  if (reducedMotion) {
+    bootProgress.style.width = "100%";
+    bootText.textContent = "nexu online // bem-vindo.";
+    if (bootPercent) bootPercent.textContent = "100%";
+    setTimeout(() => {
+      startupScreen.classList.add("hidden");
+      document.body.classList.remove("loading");
+      clearInterval(clockTimer);
+    }, 350);
+    return;
+  }
+
+  const step = () => {
+    const current = bootSequence[bootStep];
+    if (!current) return;
+
+    bootText.classList.remove("text-swap");
+    void bootText.offsetWidth;
+    bootText.classList.add("text-swap");
+    bootText.textContent = current.text;
+    bootProgress.style.width = `${current.progress}%`;
+    if (coreState) coreState.textContent = current.state;
+    if (bootPercent) animateValue(bootPercent, bootStep ? bootSequence[bootStep - 1].progress : 0, current.progress, 430, v => `${String(v).padStart(2, "0")}%`);
+    if (packetCount) animateValue(packetCount, bootStep * 760, (bootStep + 1) * 938, 430, v => String(v).padStart(4, "0"));
+
+    bootStep += 1;
+
+    if (bootStep < bootSequence.length) {
+      setTimeout(step, 500);
+    } else {
+      startupScreen.classList.add("complete");
+      setTimeout(() => {
+        startupScreen.classList.add("hidden");
+        document.body.classList.remove("loading");
+        clearInterval(clockTimer);
+        if (bootCanvasStop) bootCanvasStop();
+        document.body.classList.add("site-entered");
+      }, 900);
+    }
+  };
+
+  setTimeout(step, 240);
+}
+
+function createNetworkCanvas(canvas, options = {}) {
+  if (!canvas || reducedMotion) return () => {};
+  const ctx = canvas.getContext("2d");
+  let width = 0;
+  let height = 0;
+  let raf = 0;
+  let stopped = false;
+  let points = [];
+  const density = options.density || 12000;
+  const speed = options.speed || 0.18;
+  const maxDistance = options.maxDistance || 135;
+  const alpha = options.alpha || 0.16;
+  const mouse = { x: -9999, y: -9999 };
+
+  const resize = () => {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = Math.max(1, rect.width);
+    height = Math.max(1, rect.height);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.max(18, Math.min(95, Math.floor((width * height) / density)));
+    points = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * speed,
+      vy: (Math.random() - 0.5) * speed,
+      r: Math.random() * 1.3 + 0.5,
+    }));
+  };
+
+  const moveMouse = e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  };
+
+  const leaveMouse = () => {
+    mouse.x = mouse.y = -9999;
+  };
+
+  const draw = () => {
+    if (stopped) return;
+    ctx.clearRect(0, 0, width, height);
+
+    points.forEach((p, i) => {
+      const dxm = mouse.x - p.x;
+      const dym = mouse.y - p.y;
+      const md = Math.hypot(dxm, dym);
+      if (md < 150) {
+        p.x -= dxm * 0.00055;
+        p.y -= dym * 0.00055;
+      }
+
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -10) p.x = width + 10;
+      if (p.x > width + 10) p.x = -10;
+      if (p.y < -10) p.y = height + 10;
+      if (p.y > height + 10) p.y = -10;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(164, 149, 255, ${alpha + 0.12})`;
+      ctx.fill();
+
+      for (let j = i + 1; j < points.length; j++) {
+        const q = points[j];
+        const d = Math.hypot(p.x - q.x, p.y - q.y);
+        if (d < maxDistance) {
+          const a = (1 - d / maxDistance) * alpha;
+          const g = ctx.createLinearGradient(p.x, p.y, q.x, q.y);
+          g.addColorStop(0, `rgba(124,92,255,${a})`);
+          g.addColorStop(1, `rgba(74,232,211,${a * 0.8})`);
+          ctx.strokeStyle = g;
+          ctx.lineWidth = 0.7;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+    });
+
+    raf = requestAnimationFrame(draw);
+  };
+
+  resize();
+  window.addEventListener("resize", resize, { passive: true });
+  window.addEventListener("mousemove", moveMouse, { passive: true });
+  window.addEventListener("mouseleave", leaveMouse, { passive: true });
+  draw();
+
+  return () => {
+    stopped = true;
+    cancelAnimationFrame(raf);
+    window.removeEventListener("resize", resize);
+    window.removeEventListener("mousemove", moveMouse);
+    window.removeEventListener("mouseleave", leaveMouse);
+  };
+}
+
+window.addEventListener("load", () => {
+  bootCanvasStop = createNetworkCanvas(document.getElementById("bootCanvas"), {
+    density: 13500,
+    speed: 0.16,
+    maxDistance: 125,
+    alpha: 0.13,
+  });
+  runBootSequence();
+});
+
+function updateHeader() {
+  header?.classList.toggle("scrolled", window.scrollY > 24);
+}
+window.addEventListener("scroll", updateHeader, { passive: true });
+updateHeader();
+
+menuButton?.addEventListener("click", () => {
+  const isOpen = mobileMenu.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+});
+
+mobileMenu?.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    menuButton?.setAttribute("aria-expanded", "false");
+  });
+});
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("visible");
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.13, rootMargin: "0px 0px -40px 0px" });
+
+document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
+
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = Number(el.dataset.target || 0);
+    animateValue(el, 0, target, 1200);
+    counterObserver.unobserve(el);
+  });
+}, { threshold: 0.55 });
+
+document.querySelectorAll(".counter").forEach(el => counterObserver.observe(el));
+
+if (tiltCard && heroStage && finePointer && !reducedMotion) {
+  heroStage.addEventListener("mousemove", event => {
+    const rect = heroStage.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    const rotateY = x * 9 - 2.5;
+    const rotateX = y * -7 + 1;
+    tiltCard.style.setProperty("--tiltX", `${rotateX}deg`);
+    tiltCard.style.setProperty("--tiltY", `${rotateY}deg`);
+    tiltCard.style.setProperty("--shineX", `${(x + 0.5) * 100}%`);
+    tiltCard.style.setProperty("--shineY", `${(y + 0.5) * 100}%`);
+  });
+
+  heroStage.addEventListener("mouseleave", () => {
+    tiltCard.style.setProperty("--tiltX", "2deg");
+    tiltCard.style.setProperty("--tiltY", "-4deg");
+    tiltCard.style.setProperty("--shineX", "50%");
+    tiltCard.style.setProperty("--shineY", "30%");
+  });
+}
+
+createNetworkCanvas(document.getElementById("heroParticles"), {
+  density: 17000,
+  speed: 0.09,
+  maxDistance: 110,
+  alpha: 0.08,
+});
+
+if (finePointer && !reducedMotion) {
+  window.addEventListener("mousemove", e => {
+    document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+    document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    if (cursorAura) {
+      cursorAura.style.transform = `translate3d(${e.clientX - 180}px, ${e.clientY - 180}px, 0)`;
+    }
+  }, { passive: true });
+
+  document.querySelectorAll(".primary-button, .secondary-button, .ghost-button, .download-mega").forEach(button => {
+    button.addEventListener("mousemove", e => {
+      const r = button.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      button.style.transform = `translate3d(${x * 0.045}px, ${y * 0.06}px, 0) translateY(-2px)`;
+    });
+    button.addEventListener("mouseleave", () => {
+      button.style.transform = "";
+    });
+  });
+}
+
+let toastTimer;
+downloadTriggers.forEach(button => {
+  button.addEventListener("click", () => {
+    if (!downloadToast) return;
+    clearTimeout(toastTimer);
+    downloadToast.classList.add("show");
+    toastTimer = setTimeout(() => downloadToast.classList.remove("show"), 3400);
+  });
+});
+
+const yearElement = document.getElementById("year");
+if (yearElement) yearElement.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
